@@ -92,6 +92,7 @@ type Props = {
   renderDrawerContent: Renderer;
   renderSceneContent: Renderer;
   gestureHandlerProps?: React.ComponentProps<typeof PanGestureHandler>;
+  handleGestureEvent?: Function;
 };
 
 export default class DrawerView extends React.PureComponent<Props> {
