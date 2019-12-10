@@ -37,6 +37,7 @@ type DrawerOptions = {
   hideStatusBar?: boolean;
   style?: ViewStyle;
   gestureHandlerProps?: React.ComponentProps<typeof PanGestureHandler>;
+  handleGestureEvent?: Function;
 };
 
 type Props = {
@@ -232,6 +233,7 @@ export default class DrawerView extends React.PureComponent<Props, State> {
       hideStatusBar,
       statusBarAnimation,
       gestureHandlerProps,
+      handleGestureEvent,
     } = this.props.navigationConfig;
     const activeKey = navigation.state.routes[navigation.state.index].key;
     const { drawerLockMode } = this.props.descriptors[activeKey].options;
@@ -258,6 +260,7 @@ export default class DrawerView extends React.PureComponent<Props, State> {
           onClose={this.handleDrawerClose}
           onGestureRef={this.setDrawerGestureRef}
           gestureHandlerProps={gestureHandlerProps}
+          handleGestureEvent={handleGestureEvent}
           drawerType={drawerType}
           drawerPosition={this.props.navigationConfig.drawerPosition}
           sceneContainerStyle={sceneContainerStyle}
