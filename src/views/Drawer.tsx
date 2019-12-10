@@ -423,7 +423,7 @@ export default class DrawerView extends React.PureComponent<Props> {
     abs(divide(this.translateX, this.drawerWidth))
   );
 
-  private _handleGestureEvent = event([
+  private handleGestureEvent = event([
     {
       nativeEvent: {
         x: this.touchX,
@@ -431,14 +431,16 @@ export default class DrawerView extends React.PureComponent<Props> {
         velocityX: this.velocityX,
       },
     },
-  ]);
-
-  private handleGestureEvent = (event: any) => {
-    if (this.props.handleGestureEvent) {
-      this.props.handleGestureEvent(event);
-    }
-    this._handleGestureEvent(event);
-  }
+  ],{
+    listener: (event: any) => {
+      const offsetY = event.nativeEvent.contentOffset.y;
+      const offsetX = event.nativeEvent.contentOffset.x;
+      console.log("ololo");
+      if (this.props.handleGestureEvent) {
+        this.props.handleGestureEvent(event);
+      }
+    },
+  });
 
   private handleGestureStateChange = event([
     {
