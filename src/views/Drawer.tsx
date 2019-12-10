@@ -433,9 +433,6 @@ export default class DrawerView extends React.PureComponent<Props> {
     },
   ],{
     listener: (event: any) => {
-      const offsetY = event.nativeEvent.contentOffset.y;
-      const offsetX = event.nativeEvent.contentOffset.x;
-      console.log("ololo");
       if (this.props.handleGestureEvent) {
         this.props.handleGestureEvent(event);
       }
