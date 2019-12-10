@@ -423,20 +423,14 @@ export default class DrawerView extends React.PureComponent<Props> {
     abs(divide(this.translateX, this.drawerWidth))
   );
 
-  private handleGestureEvent = block([
-    call([
-      {
-        nativeEvent: {
-          x: this.touchX,
-          translationX: this.gestureX,
-          velocityX: this.velocityX,
-        },
+  private handleGestureEvent = event([
+    {
+      nativeEvent: {
+        x: this.touchX,
+        translationX: this.gestureX,
+        velocityX: this.velocityX,
       },
-    ], (event: any) => {
-      if (this.props.handleGestureEvent) {
-        this.props.handleGestureEvent(event);
-      }
-    }),
+    },
   ]);
 
   private handleGestureStateChange = event([
