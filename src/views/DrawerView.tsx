@@ -101,7 +101,8 @@ export default class DrawerView extends React.PureComponent<Props, State> {
   private drawerGestureRef = React.createRef<PanGestureHandler>();
 
   private handleDrawerOpen = () => {
-    const { navigation, onOpen } = this.props;
+    const { navigation } = this.props;
+    const { onOpen } = this.props.navigationConfig;
 
     if (onOpen) {
       onOpen();
@@ -115,7 +116,8 @@ export default class DrawerView extends React.PureComponent<Props, State> {
   };
 
   private handleDrawerClose = () => {
-    const { navigation, onClose } = this.props;
+    const { navigation } = this.props;
+    const { onClose } = this.props.navigationConfig;
 
     if (onClose) {
       onClose();
