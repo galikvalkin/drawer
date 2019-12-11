@@ -427,7 +427,7 @@ export default class DrawerView extends React.PureComponent<Props> {
   private handleGestureEvent = event([
     {
       nativeEvent: {
-        x: (x: number) => lock([
+        x: (x: number) => block([
           set(this.touchX, x),
           call(
             [x],
