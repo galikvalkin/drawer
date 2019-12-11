@@ -433,12 +433,22 @@ export default class DrawerView extends React.PureComponent<Props> {
             [x],
             (data) => {
               if (this.props.handleGestureEvent) {
-                this.props.handleGestureEvent(data);
+                this.props.handleGestureEvent({x: data});
               }
             }
           )
         ]),
-        translationX: this.gestureX,
+        translationX: (translationX: number) => block([
+          set(this.gestureX, translationX),
+          call(
+            [translationX],
+            (data) => {
+              if (this.props.handleGestureEvent) {
+                this.props.handleGestureEvent({translationX: data});
+              }
+            }
+          )
+        ]),
         velocityX: this.velocityX,
       },
     },
