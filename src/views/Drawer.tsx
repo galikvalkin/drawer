@@ -93,6 +93,7 @@ type Props = {
   renderSceneContent: Renderer;
   gestureHandlerProps?: React.ComponentProps<typeof PanGestureHandler>;
   handleGestureEvent?: Function;
+  handleGestureStateChange?: Function;
 };
 
 export default class DrawerView extends React.PureComponent<Props> {
@@ -426,9 +427,9 @@ export default class DrawerView extends React.PureComponent<Props> {
   private handleGestureEvent = event([
     {
       nativeEvent: {
-        x: (x: number) => Animated.block([
-          Animated.set(this.touchX, x),
-          Animated.call(
+        x: (x: number) => lock([
+          set(this.touchX, x),
+          call(
             [x],
             (data) => {
               if (this.props.handleGestureEvent) {
@@ -437,7 +438,6 @@ export default class DrawerView extends React.PureComponent<Props> {
             }
           )
         ]),
-        // x: this.touchX,
         translationX: this.gestureX,
         velocityX: this.velocityX,
       },
@@ -447,7 +447,17 @@ export default class DrawerView extends React.PureComponent<Props> {
   private handleGestureStateChange = event([
     {
       nativeEvent: {
-        state: (s: Animated.Value<number>) => set(this.gestureState, s),
+        state: (s: Animated.Value<number>) => block([
+          set(this.gestureState, s),
+          call(
+            [s],
+            (data) => {
+              if (this.props.handleGestureStateChange) {
+                this.props.handleGestureStateChange(data);
+              }
+            }
+          )
+        ]),
       },
     },
   ]);
