@@ -430,9 +430,9 @@ export default class DrawerView extends React.PureComponent<Props> {
           Animated.set(this.touchX, x),
           Animated.call(
             [x],
-            () => {
+            (data) => {
               if (this.props.handleGestureEvent) {
-                this.props.handleGestureEvent(x);
+                this.props.handleGestureEvent(data);
               }
             }
           )
