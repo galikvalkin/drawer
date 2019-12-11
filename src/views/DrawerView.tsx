@@ -38,7 +38,9 @@ type DrawerOptions = {
   style?: ViewStyle;
   gestureHandlerProps?: React.ComponentProps<typeof PanGestureHandler>;
   handleGestureEvent?: Function;
-  handleGestureStateChange?: Function,
+  handleGestureStateChange?: Function;
+  onOpen?: () => void;
+  onClose?: () => void;
 };
 
 type Props = {
@@ -99,7 +101,11 @@ export default class DrawerView extends React.PureComponent<Props, State> {
   private drawerGestureRef = React.createRef<PanGestureHandler>();
 
   private handleDrawerOpen = () => {
-    const { navigation } = this.props;
+    const { navigation, onOpen } = this.props;
+
+    if (onOpen) {
+      onOpen();
+    }
 
     navigation.dispatch(
       DrawerActions.openDrawer({
@@ -109,7 +115,11 @@ export default class DrawerView extends React.PureComponent<Props, State> {
   };
 
   private handleDrawerClose = () => {
-    const { navigation } = this.props;
+    const { navigation, onClose } = this.props;
+
+    if (onClose) {
+      onClose();
+    }
 
     navigation.dispatch(
       DrawerActions.closeDrawer({
